@@ -2,22 +2,22 @@
 
 # Mount persistent configuration directory
 # ----------------------------------------
-mkdir /home/rancher/conf
-chmod u=rwXt,go= /home/rancher/conf
-mount -t ext4 /dev/disk/by-label/config-2 /home/rancher/conf
-if [ ! -s /home/rancher/conf/cloud.config.sh ]
-then
-  ln -s /home/rancher/conf/openstack/latest/user_data /home/rancher/conf/cloud.config.sh
-fi
+  mkdir /home/rancher/conf
+  chmod u=rwXt,go= /home/rancher/conf
+  mount -t ext4 /dev/disk/by-label/config-2 /home/rancher/conf
+  if [ ! -s /home/rancher/conf/cloud.config.sh ]
+  then
+    ln -s /home/rancher/conf/openstack/latest/user_data /home/rancher/conf/cloud.config.sh
+  fi
 
 # Copy persistent rc.local
 # ------------------------
-if [ ! -s /home/rancher/conf/rc.local ]
-then
-  echo '#!/bin/sh -e' > /home/rancher/conf/rc.local
-  chmod u=rwxt,go= /home/rancher/conf/rc.local
-fi
-cp /home/rancher/conf/rc.local /etc/rc.local
+  if [ ! -s /home/rancher/conf/rc.local ]
+  then
+    echo '#!/bin/sh -e' > /home/rancher/conf/rc.local
+    chmod u=rwxt,go= /home/rancher/conf/rc.local
+  fi
+  cp /home/rancher/conf/rc.local /etc/rc.local
 
 # Set rancher user password (optional)
 # ------------------------------------
