@@ -67,10 +67,6 @@
 # fi
 # /bin/sh -c '/home/rancher/conf/init.zram.swap' &
 
-# Start Open VMware Tools (optional)
-# ----------------------------------
-# /bin/sh -c 'ros service enable open-vm-tools && ros service up -d open-vm-tools' &
-
 # Merge persistent cloud-config.yml (optional)
 # --------------------------------------------
 # if [ ! -s /home/rancher/conf/cloud-config.yml ]
@@ -81,6 +77,11 @@
 # fi
 # ros config merge < /home/rancher/conf/cloud-config.yml
 # hostname `ros config get hostname`
+# ros service restart network
+
+# Start Open VMware Tools (optional)
+# ----------------------------------
+# /bin/sh -c 'ros service enable open-vm-tools && ros service up open-vm-tools' &
                                                                          
 # Start Rancher Server (optional)                                              
 # -------------------------------                                                       
