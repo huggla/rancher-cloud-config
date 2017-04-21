@@ -19,6 +19,12 @@
   fi
   cp /home/rancher/conf/rc.local /etc/rc.local
 
+# Mount nfs-share device (optional)
+# ---------------------------------
+# mkdir /home/rancher/nfs-share
+# chown nobody:nogroup /home/rancher/nfs-share
+# mount -t ext4 -o async,noatime,nosuid,nodev,journal_async_commit,inode_readahead_blks=64,commit=300,barrier=0,journal_ioprio=2,errors=remount-ro /dev/disk/by-label/nfs /home/rancher/nfs-share # Ext4 formatted hd with external journal and NO SECURITY
+
 # Set rancher user password (optional)
 # ------------------------------------
 # if [ ! -s /home/rancher/conf/set.rancher.pw ]
