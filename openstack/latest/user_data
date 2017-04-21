@@ -19,11 +19,16 @@
   fi
   cp /home/rancher/conf/rc.local /etc/rc.local
 
-# Mount nfs-share device (optional)
-# ---------------------------------
+# Prepare nfs-share (optional)
+# ----------------------------
 # mkdir /home/rancher/nfs-share
 # chown nobody:nogroup /home/rancher/nfs-share
 # mount -t ext4 -o async,noatime,nosuid,nodev,journal_async_commit,inode_readahead_blks=64,commit=300,barrier=0,journal_ioprio=2,errors=remount-ro /dev/disk/by-label/nfs /home/rancher/nfs-share # Ext4 formatted hd with external journal and NO SECURITY
+# if [ ! -s /home/rancher/conf/nfs-exports ]
+# then
+#   echo '/nfs-share *(rw,async,no_subtree_check,no_auth_nlm,no_root_squash,crossmnt,no_acl,fsid=0)' > /home/rancher/conf/nfs-exports # NO SECURITY
+#   chmod u=rwt,go= /home/rancher/conf/nfs-exports
+# fi
 
 # Set rancher user password (optional)
 # ------------------------------------
