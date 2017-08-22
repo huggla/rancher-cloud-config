@@ -89,7 +89,7 @@
 # chmod u=rwXt,go= /home/rancher/rancher-db                               
 # mount -t ext4 /dev/disk/by-label/rancher-db /home/rancher/rancher-db                                    
 # echo 'wait-for-docker' >> /etc/rc.local                                          
-# echo 'docker run -d --restart=unless-stopped -p 8080:8080 -v /home/rancher/rancher-db:/var/lib/mysql rancher/server:latest > /var/log/rancherserver-start.log 2>&1 &' >> /etc/rc.local
+# echo 'docker run -d --restart=unless-stopped -p 8080:8080 -v /home/rancher/rancher-db:/var/lib/mysql rancher/server:stable > /var/log/rancherserver-start.log 2>&1 &' >> /etc/rc.local
                                                       
 # Start Rancher Agent (optional)                                                                                                                                                        
 # ------------------------------                                   
