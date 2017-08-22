@@ -2,12 +2,15 @@
 
 # Mount persistent configuration directory
 # ----------------------------------------
-  mkdir /home/rancher/conf
-  chmod u=rwXt,go= /home/rancher/conf
-  mount -t ext4 /dev/disk/by-label/config-2 /home/rancher/conf
-  if [ ! -s /home/rancher/conf/cloud.config.sh ]
+  if [ ! -s /home/rancher/conf ]                                                                                                                                                                                                             
   then
-    ln -s /home/rancher/conf/openstack/latest/user_data /home/rancher/conf/cloud.config.sh
+    mkdir /home/rancher/conf
+    chmod u=rwXt,go= /home/rancher/conf
+    mount -t ext4 /dev/disk/by-label/config-2 /home/rancher/conf
+    if [ ! -s /home/rancher/conf/cloud.config.sh ]
+    then
+      ln -s /home/rancher/conf/openstack/latest/user_data /home/rancher/conf/cloud.config.sh
+    fi
   fi
 
 # Copy persistent rc.local
@@ -21,13 +24,16 @@
 
 # Prepare nfs-share (optional)
 # ----------------------------
-# mkdir /home/rancher/nfs-share
-# chown nobody:nogroup /home/rancher/nfs-share
-# mount -t ext4 -o async,noatime,nosuid,nodev,journal_async_commit,inode_readahead_blks=64,commit=300,barrier=0,journal_ioprio=2,errors=remount-ro /dev/disk/by-label/nfs /home/rancher/nfs-share # Ext4 formatted hd with external journal and NO SECURITY
-# if [ ! -s /home/rancher/conf/nfs-exports ]
-# then
-#   echo '/nfs-share *(rw,async,no_subtree_check,no_auth_nlm,no_root_squash,crossmnt,no_acl,fsid=0)' > /home/rancher/conf/nfs-exports # NO SECURITY
-#   chmod u=rwt,go= /home/rancher/conf/nfs-exports
+# if [ ! -s /home/rancher/nfs-share ]                                                                                                                                                                                                        
+#   then
+#   mkdir /home/rancher/nfs-share
+#   chown nobody:nogroup /home/rancher/nfs-share
+#   mount -t ext4 -o async,noatime,nosuid,nodev,journal_async_commit,inode_readahead_blks=64,commit=300,barrier=0,journal_ioprio=2,errors=remount-ro /dev/disk/by-label/nfs /home/rancher/nfs-share # Ext4 formatted hd with external journal and NO SECURITY
+#   if [ ! -s /home/rancher/conf/nfs-exports ]
+#   then
+#     echo '/nfs-share *(rw,async,no_subtree_check,no_auth_nlm,no_root_squash,crossmnt,no_acl,fsid=0)' > /home/rancher/conf/nfs-exports # NO SECURITY
+#     chmod u=rwt,go= /home/rancher/conf/nfs-exports
+#   fi
 # fi
 
 # Set rancher user password (optional)
