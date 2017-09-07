@@ -13,6 +13,18 @@
     fi
   fi
 
+# Copy persistent ssh configuration
+# ---------------------------------
+  sshDir="/home/rancher/conf/ssh"
+  if [ ! -s $sshDir ]
+  then
+    cp -rfp /etc/ssh $sshDir
+  fi
+  if [ "$(ls -A $sshDir)" ]
+  then
+    cp -rfp $sshDir/* /etc/ssh/
+  fi
+
 # Copy persistent rc.local
 # ------------------------
   if [ ! -s /home/rancher/conf/rc.local ]
