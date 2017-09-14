@@ -52,10 +52,11 @@
 # ------------------------------------
 # if [ ! -s /home/rancher/conf/set.rancher.pw ]
 # then
+#   encryptedPasswd=`mkpasswd -m sha-512 <<< good_password`
 #   touch /home/rancher/conf/set.rancher.pw
 #   chmod u=rwxt,go= /home/rancher/conf/set.rancher.pw
 #   echo '#!/bin/sh -e' > /home/rancher/conf/set.rancher.pw
-#   echo "echo 'rancher:rancher' | chpasswd" >> /home/rancher/conf/set.rancher.pw
+#   echo "echo 'rancher:$encryptedPasswd' | chpasswd -e" >> /home/rancher/conf/set.rancher.pw
 # fi
 # /bin/sh -c '/home/rancher/conf/set.rancher.pw' &
 
