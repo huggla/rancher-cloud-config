@@ -19,7 +19,6 @@
   if [ ! -s $sshDir ]
   then
     cp -rfp /etc/ssh $sshDir
-  fi
   elif [ "$(ls -A $sshDir)" ]
   then
     cp -rfp $sshDir/* /etc/ssh/
