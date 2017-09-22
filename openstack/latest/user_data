@@ -20,7 +20,7 @@
   then
     cp -rfp /etc/ssh $sshDir
   fi
-  if [ "$(ls -A $sshDir)" ]
+  elif [ "$(ls -A $sshDir)" ]
   then
     cp -rfp $sshDir/* /etc/ssh/
   fi
@@ -121,14 +121,18 @@
 # then                                                                                                                                                                                    
 #   touch /home/rancher/conf/host_registration_url    
 #   chmod u=rwt,go= /home/rancher/conf/host_registration_url
-# else                                                        
-#   mkdir /var/lib/rancher/state                                                     
-#   if [ ! -d "/home/rancher/conf/state" ]             
-#   then                                                                
-#     mkdir /home/rancher/conf/state                     
-#     chmod -R u=rwXt,go= /home/rancher/conf/state                                                                                                                                        
-#   fi                                                
-#   mount -o bind /home/rancher/conf/state /var/lib/rancher/state
+# else
+#   mkdir /var/lib/rancher/state
+#   touch /var/lib/rancher/state/.docker_uuid /var/lib/rancher/state/.physical_host_uuid /var/lib/rancher/state/.registration_token
+#   if [ ! -d "/home/rancher/conf/state" ]
+#   then
+#     mkdir /home/rancher/conf/state
+#     touch /home/rancher/conf/state/.docker_uuid /home/rancher/conf/state/.physical_host_uuid /home/rancher/conf/state/.registration_token
+#     chmod -R u=rwXt,go= /home/rancher/conf/state
+#   fi
+#   mount -o bind /home/rancher/conf/state/.docker_uuid /var/lib/rancher/state/.docker_uuid
+#   mount -o bind /home/rancher/conf/state/.physical_host_uuid /var/lib/rancher/state/.physical_host_uuid
+#   mount -o bind /home/rancher/conf/state/.registration_token /var/lib/rancher/state/.registration_token
 #   read cattleHostLabels < /home/rancher/conf/cattle_host_labels  
 #   read hostRegistrationUrl < /home/rancher/conf/host_registration_url
 #   echo 'wait-for-docker' >> /etc/rc.local                      
