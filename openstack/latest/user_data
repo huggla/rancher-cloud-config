@@ -42,7 +42,7 @@
 #   mount -t ext4 -o async,noatime,nosuid,nodev,journal_async_commit,inode_readahead_blks=64,commit=300,barrier=0,journal_ioprio=2,errors=remount-ro /dev/disk/by-label/nfs /home/rancher/nfs-share # Ext4 formatted hd with external journal and NO SECURITY
 #   if [ ! -s /home/rancher/conf/nfs-exports ]
 #   then
-#     echo '/nfs-share *(rw,async,no_subtree_check,no_auth_nlm,no_root_squash,crossmnt,no_acl,fsid=0)' > /home/rancher/conf/nfs-exports # NO SECURITY
+#     echo '/nfs-share *(rw,sync,no_wdelay,no_subtree_check,no_auth_nlm,no_root_squash,crossmnt,no_acl,fsid=0)' > /home/rancher/conf/nfs-exports # NO SECURITY
 #     chmod u=rwt,go= /home/rancher/conf/nfs-exports
 #   fi
 # fi
